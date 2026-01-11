@@ -75,6 +75,17 @@ export function createEmailTransporter(): Transporter {
     );
   }
 
+  // Common connection options for cloud environments
+  const connectionOptions = {
+    connectionTimeout: 60000, // 60 seconds
+    greetingTimeout: 30000, // 30 seconds
+    socketTimeout: 60000, // 60 seconds
+    // Increase socket timeout for cloud platforms
+    pool: true,
+    maxConnections: 1,
+    maxMessages: 3,
+  };
+
   // Gmail configuration
   if (config.host && (config.host.includes('gmail.com') || config.host.includes('googlemail.com'))) {
     return nodemailer.createTransport({
@@ -83,6 +94,7 @@ export function createEmailTransporter(): Transporter {
         user: config.user,
         pass: config.pass,
       },
+      ...connectionOptions,
     });
   }
 
@@ -96,6 +108,7 @@ export function createEmailTransporter(): Transporter {
         user: config.user,
         pass: config.pass,
       },
+      ...connectionOptions,
     });
   }
 
@@ -106,6 +119,7 @@ export function createEmailTransporter(): Transporter {
       user: config.user,
       pass: config.pass,
     },
+    ...connectionOptions,
   });
 }
 
