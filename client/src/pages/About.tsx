@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
 import { FreeQuoteModal } from "@/components/FreeQuoteModal";
 import { Button } from "@/components/ui/button";
-import { Target, Lightbulb, Users, Shield, Briefcase, Building2, CheckCircle2, MapPin, Rocket } from "lucide-react";
+import { Target, Lightbulb, Users, Shield, Briefcase, Building2, CheckCircle2, MapPin, Rocket, Sparkles } from "lucide-react";
 import { navigate } from "wouter/use-browser-location";
-
 export default function About() {
   const strengths = [
     { title: "Technical Expertise", desc: "Strong technical knowledge and collective team experience." },
     { title: "Turnkey EPC", desc: "Comprehensive engineering, procurement, and construction." },
     { title: "Strategic Liaisoning", desc: "Expertise in land liaisoning and project identification." },
-    { title: "25+ Yrs Experience", desc: "Cumulative expertise in solar, electrical, and thermal power." }
+    { title: "10+ Yrs Experience", desc: "Cumulative expertise in solar, electrical, and thermal power." }
   ];
 
   const services = [
@@ -73,12 +72,18 @@ export default function About() {
 
       {/* About Us Section */}
       <section className="py-20 bg-white">
-        <div className="container-custom">
+      <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
               <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 block">About Our Company</span>
-              <h2 className="text-3xl lg:text-4xl font-display font-bold mb-6">Expert Solutions for a Sustainable Future</h2>
-              <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+              <h2 className="text-3xl lg:text-5xl font-display font-bold mb-8 text-gray-900 leading-tight">
+                Expert Solutions for a Sustainable Future
+              </h2>
+              <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
                   Swayog Consultancy Services is honored to introduce itself as a company that brings complete Solar energy and electrical solutions under one roof. We provide Solar Energy and electrical Solutions, on turnkey basis or only for selective scope of work for small as well as utility scale projects.
                 </p>
@@ -86,14 +91,37 @@ export default function About() {
                   Established in year 2017, we have installed around 25 MW+ of solar projects. Our team consists of expert engineers, technicians, and consultants with cumulative 25+ years of experience in solar energy, electrical, thermal power, and other industries.
                 </p>
               </div>
-            </div>
-            <div className="relative">
-              <img src="/images/himgiri.jpeg" alt="Swayog Solar Installation" className="rounded-2xl shadow-2xl w-full h-[400px] object-cover" />
-              <div className="absolute -bottom-6 -right-6 bg-primary p-8 rounded-2xl shadow-xl text-white hidden md:block">
-                <p className="text-4xl font-bold">25+</p>
-                <p className="text-sm font-medium uppercase tracking-wider">Years Collective Exp</p>
+              <div className="mt-10 flex flex-wrap gap-8">
+                <div className="flex flex-col">
+                  <span className="text-4xl font-bold text-secondary">25+ MW</span>
+                  <span className="text-gray-500 font-medium">Solar Installed</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-4xl font-bold text-secondary">10+</span>
+                  <span className="text-gray-500 font-medium">Years Collective Exp</span>
+                </div>
               </div>
-            </div>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="aspect-[4/4] rounded-3xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/images/handShake.png" 
+                  alt="Solar Site" 
+                  className="w-full h-full object-cover" 
+                />
+              </div>
+              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 max-w-xs">
+                <Sparkles className="h-6 w-6 text-primary mb-3" />
+                <p className="text-gray-900 font-bold italic text-base leading-snug">
+                  "Working closely with society to make solar energy economical for everyone."
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -246,57 +274,71 @@ export default function About() {
         </div>
       </section>
 
-      {/* Entrepreneurship Motto */}
-      <section className="py-20 bg-gradient-to-br from-primary via-primary/95 to-secondary text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/industrial.jpg')] bg-cover bg-center opacity-10" />
+      <section className="py-24 relative overflow-hidden bg-gray-900 text-white">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/industrial.jpg" 
+            alt="Solar Partner" 
+            className="w-full h-full object-cover opacity-20 scale-110" 
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/90 to-transparent" />
+        </div>
+        
         <div className="container-custom relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="mb-8"
             >
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-6">
-                <Rocket className="h-10 w-10 text-white" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 backdrop-blur-md text-primary font-bold text-sm mb-6 border border-primary/20">
+                <Rocket className="h-4 w-4" />
+                <span className="tracking-widest uppercase">Company Motto</span>
               </div>
-              <h2 className="text-3xl lg:text-5xl font-display font-bold mb-6">
-                Our Company Motto
+              <h2 className="text-4xl lg:text-6xl font-display font-bold mb-8 leading-tight">
+                Encouraging <span className="text-primary italic">Entrepreneurship</span>
               </h2>
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/20">
-                <p className="text-xl md:text-2xl leading-relaxed mb-6 font-medium">
-                  <span className="text-3xl md:text-4xl font-bold block mb-4">
-                    "Encouraging Entrepreneurship"
-                  </span>
-                  We believe in empowering individuals from every state across India to take charge of their future. 
-                  Anyone, from any state, can partner with us to sell solar solutions in their area. 
-                  We provide the support, training, and resources you need to grow with us and build a sustainable business.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                  <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
-                    <Users className="h-8 w-8 mx-auto mb-3" />
-                    <h4 className="font-bold text-lg mb-2">Open to All</h4>
-                    <p className="text-sm opacity-90">Anyone from any state can join us</p>
+              <p className="text-xl text-gray-300 mb-10 leading-relaxed max-w-xl">
+                Take charge of your future today. We invite individuals from every state in India to become solar partners in their local regions.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                {[
+                  { icon: Users, title: "Open to All", text: "Anyone from any state can join us" },
+                  { icon: Shield, title: "Full Support", text: "Training and resources provided" }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                    <item.icon className="h-10 w-10 text-primary shrink-0" />
+                    <div>
+                      <h4 className="font-bold text-lg mb-1">{item.title}</h4>
+                      <p className="text-sm text-gray-400">{item.text}</p>
+                    </div>
                   </div>
-                  <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
-                    <Shield className="h-8 w-8 mx-auto mb-3" />
-                    <h4 className="font-bold text-lg mb-2">Full Support</h4>
-                    <p className="text-sm opacity-90">Training and resources provided</p>
-                  </div>
-                  <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
-                    <Rocket className="h-8 w-8 mx-auto mb-3" />
-                    <h4 className="font-bold text-lg mb-2">Grow Together</h4>
-                    <p className="text-sm opacity-90">Build your business with our help</p>
-                  </div>
-                </div>
-                <div className="mt-8">
-                 <Button 
-                      size="lg" 
-                      className="bg-white text-primary hover:bg-gray-100 text-lg px-8 h-14 rounded-full font-bold shadow-2xl"
-                      onClick={() => navigate("/contact")}
-                    >
-                      Join Our Network
-                    </Button>
+                ))}
+              </div>
+
+              <Button 
+                size="lg" 
+                className="h-16 px-10 text-xl rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-2xl shadow-primary/20"
+                onClick={() => navigate("/contact")}
+              >
+                Join Our Network
+              </Button>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative hidden lg:block"
+            >
+              <div className="p-12 bg-white/10 backdrop-blur-xl rounded-[3rem] border border-white/10 shadow-2xl">
+                <blockquote className="text-2xl font-medium leading-relaxed italic text-gray-100">
+                  "With our comprehensive support and expert training, you’ll have everything you need to launch and grow a successful, sustainable enterprise. Build your business with our help."
+                </blockquote>
+                <div className="mt-8 flex items-center gap-4">
+                  <div className="w-12 h-1 bg-primary rounded-full" />
+                  <p className="text-sm font-bold uppercase tracking-widest text-primary">Swayog Mission</p>
                 </div>
               </div>
             </motion.div>
