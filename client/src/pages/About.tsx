@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { FreeQuoteModal } from "@/components/FreeQuoteModal";
 import { Button } from "@/components/ui/button";
-import { Target, Lightbulb, Users, Shield, Briefcase, Building2, CheckCircle2 } from "lucide-react";
+import { Target, Lightbulb, Users, Shield, Briefcase, Building2, CheckCircle2, MapPin, Rocket } from "lucide-react";
+import { navigate } from "wouter/use-browser-location";
 
 export default function About() {
   const strengths = [
@@ -28,8 +29,22 @@ export default function About() {
 
   const teamMembers = [
     { name: "Yogesh G. Tayade", role: "Proprietor & Technical Head", image: "/images/img1.jpeg" },
+    { name: "Gokul Girdhar", role: "Senior Engineer", image: "/images/gokul girdhar.jpeg" },
+    { name: "Balaji", role: "Project Manager", image: "/images/balaji.jpeg" },
     { name: "Project Management Team", role: "Solar & Thermal Experts", image: "/images/img2.jpeg" },
-    { name: "Installation Team", role: "Skilled Technicians", image: "/images/balaji.jpeg" }
+    { name: "Installation Team", role: "Skilled Technicians", image: "/images/com.jpeg" },
+    { name: "Technical Team", role: "Engineering Specialists", image: "/images/WhatsApp Image 2025-07-21 at 11.26.34.jpeg" }
+  ];
+
+  const locations = [
+    { city: "Nagpur", state: "Maharashtra", lat: 21.1458, lng: 79.0882 },
+    { city: "Mumbai", state: "Maharashtra", lat: 19.0760, lng: 72.8777 },
+    { city: "Pune", state: "Maharashtra", lat: 18.5204, lng: 73.8567 },
+    { city: "Delhi", state: "Delhi", lat: 28.6139, lng: 77.2090 },
+    { city: "Bangalore", state: "Karnataka", lat: 12.9716, lng: 77.5946 },
+    { city: "Hyderabad", state: "Telangana", lat: 17.3850, lng: 78.4867 },
+    { city: "Chennai", state: "Tamil Nadu", lat: 13.0827, lng: 80.2707 },
+    { city: "Kolkata", state: "West Bengal", lat: 22.5726, lng: 88.3639 }
   ];
 
   return (
@@ -142,18 +157,149 @@ export default function About() {
               Our team of 30+ experienced professionals manages project execution with maximum efficiency and technical excellence.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
             {teamMembers.map((member, i) => (
-              <div key={i} className="bg-white rounded-3xl overflow-hidden shadow-sm group">
-                <div className="h-72 overflow-hidden">
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex flex-col items-center group"
+              >
+                <div className="relative mb-4">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:border-primary transition-colors">
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-6 h-6 bg-primary rounded-full border-4 border-white shadow-md"></div>
                 </div>
-                <div className="p-6 text-center">
-                  <h4 className="text-xl font-bold mb-1">{member.name}</h4>
-                  <p className="text-primary font-medium">{member.role}</p>
+                <div className="text-center">
+                  <h4 className="text-base md:text-lg font-bold mb-1">{member.name}</h4>
+                  <p className="text-sm md:text-base text-primary font-medium">{member.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Presence in India */}
+      <section className="py-20 bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold mb-4">Our Presence in India</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Serving clients across multiple states with our solar energy solutions and expertise.
+            </p>
+          </div>
+          <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-200">
+            <div className="relative bg-white rounded-2xl p-8 md:p-12 min-h-[400px]">
+              {/* India Map Representation */}
+              
+              
+              {/* Location List */}
+              <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                {locations.map((location, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center gap-2 p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg hover:bg-primary/10 hover:shadow-md transition-all cursor-pointer border border-gray-200 hover:border-primary/30"
+                  >
+                    <div className="p-2 bg-primary/10 rounded-full">
+                      <MapPin className="h-4 w-4 text-primary shrink-0" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">{location.city}</p>
+                      <p className="text-xs text-gray-500">{location.state}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Stats */}
+              <div className="mt-8 pt-8 border-t border-gray-200">
+                <div className="grid grid-cols-3 gap-6 text-center">
+                  <div>
+                    <p className="text-3xl font-bold text-primary mb-1">8+</p>
+                    <p className="text-sm text-gray-600">Cities</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-primary mb-1">6+</p>
+                    <p className="text-sm text-gray-600">States</p>
+                  </div>
+                  <div>
+                    <p className="text-3xl font-bold text-primary mb-1">25+</p>
+                    <p className="text-sm text-gray-600">MW Installed</p>
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Entrepreneurship Motto */}
+      <section className="py-20 bg-gradient-to-br from-primary via-primary/95 to-secondary text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/industrial.jpg')] bg-cover bg-center opacity-10" />
+        <div className="container-custom relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-8"
+            >
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-6">
+                <Rocket className="h-10 w-10 text-white" />
+              </div>
+              <h2 className="text-3xl lg:text-5xl font-display font-bold mb-6">
+                Our Company Motto
+              </h2>
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/20">
+                <p className="text-xl md:text-2xl leading-relaxed mb-6 font-medium">
+                  <span className="text-3xl md:text-4xl font-bold block mb-4">
+                    "Encouraging Entrepreneurship"
+                  </span>
+                  We believe in empowering individuals from every state across India to take charge of their future. 
+                  Anyone, from any state, can partner with us to sell solar solutions in their area. 
+                  We provide the support, training, and resources you need to grow with us and build a sustainable business.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                  <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
+                    <Users className="h-8 w-8 mx-auto mb-3" />
+                    <h4 className="font-bold text-lg mb-2">Open to All</h4>
+                    <p className="text-sm opacity-90">Anyone from any state can join us</p>
+                  </div>
+                  <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
+                    <Shield className="h-8 w-8 mx-auto mb-3" />
+                    <h4 className="font-bold text-lg mb-2">Full Support</h4>
+                    <p className="text-sm opacity-90">Training and resources provided</p>
+                  </div>
+                  <div className="bg-white/10 rounded-xl p-6 backdrop-blur-sm">
+                    <Rocket className="h-8 w-8 mx-auto mb-3" />
+                    <h4 className="font-bold text-lg mb-2">Grow Together</h4>
+                    <p className="text-sm opacity-90">Build your business with our help</p>
+                  </div>
+                </div>
+                <div className="mt-8">
+                 <Button 
+                      size="lg" 
+                      className="bg-white text-primary hover:bg-gray-100 text-lg px-8 h-14 rounded-full font-bold shadow-2xl"
+                      onClick={() => navigate("/contact")}
+                    >
+                      Join Our Network
+                    </Button>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
