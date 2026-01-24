@@ -1,7 +1,7 @@
 // Vercel serverless function for contact form messages
 import 'dotenv/config';
 import { z } from 'zod';
-import { getReceiverEmail, getSenderEmail, getSmtpConfig, sendEmail } from '../server/email';
+import { getReceiverEmail, getSenderEmail, getSmtpConfig, sendEmail } from './email-utils';
 
 const contactSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
