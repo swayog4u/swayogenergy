@@ -20,7 +20,10 @@ export const insertInquirySchema = createInsertSchema(inquiries).omit({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   projectType: z.enum(["Residential", "Commercial", "Industrial"]),
-  customerNo: z.string().min(1, "Consumer ID is required"),
+  // Make consumer ID optional so users can submit the form
+  // even if they don't know or want to provide it.
+  // Accept either a non-empty string or an empty value.
+  customerNo: z.string().min(1, "Consumer ID is required").optional().or(z.literal("")),
 });
 
 export type Inquiry = typeof inquiries.$inferSelect;

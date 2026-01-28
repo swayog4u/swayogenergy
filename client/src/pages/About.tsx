@@ -31,9 +31,9 @@ export default function About() {
   ];
 
   const teamMembers = [
-    { name: "Gokul Girdhar", role: "Senior Engineer", image: "/images/gokul girdhar.jpeg" },
-    { name: "Balaji", role: "Project Manager", image: "/images/balaji.jpeg" },
-    { name: "Project Management Team", role: "Solar & Thermal Experts", image: "/images/img2.jpeg" },
+    { name: "Kunal Dhakate", role: "Senior Engineer", image: "/images/kunal.jpeg" },
+    { name: "Tejaswini", role: "Project Manager", image: "/images/balaji.jpeg" },
+    { name: "Sagar Dhakate", role: "Solar & Thermal Experts", image: "/images/img2.jpeg" },
     { name: "Installation Team", role: "Skilled Technicians", image: "/images/com.jpeg" },
     { name: "Technical Team", role: "Engineering Specialists", image: "/images/WhatsApp Image 2025-07-21 at 11.26.34.jpeg" }
   ];
@@ -209,7 +209,7 @@ export default function About() {
               {/* CEO Image Side - High Contrast Professional Portrait */}
               <div className="w-full lg:w-5/12 relative min-h-[500px] lg:min-h-[650px] group">
                 <img 
-                  src="/images/img1.jpeg" 
+                  src="/images/ceo.jpg" 
                   alt="Yogesh G. Tayade - Founder & CEO" 
                   className="absolute inset-0 w-full h-full object-cover object-center filter grayscale contrast-110 brightness-110 transition-all duration-700 group-hover:grayscale-0 group-hover:contrast-100" 
                 />

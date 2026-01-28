@@ -13,7 +13,7 @@ export default function Pricing() {
       name: "Basic Home",
       capacity: "3 kW",
       desc: "Perfect for 2-3 BHK apartments with basic appliances.",
-      price: "₹1,80,000*",
+      price: "₹1,90,000*",
       savings: "₹3,500 / month",
       features: [
         "Tier-1 Polycrystalline Panels",
@@ -28,7 +28,7 @@ export default function Pricing() {
       capacity: "5 kW",
       popular: true,
       desc: "Ideal for bungalows with ACs and geysers.",
-      price: "₹2,75,000*",
+      price: "₹3,10,000*",
       savings: "₹6,000 / month",
       features: [
         "Tier-1 Mono-PERC Panels (High Eff.)",
