@@ -84,7 +84,7 @@ export default function Process() {
             <FreeQuoteModal>
               <Button
                 size="lg"
-                className="rounded-full px-8 bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-lg"
+                className="rounded-full px-6 sm:px-8 h-12 sm:h-14 text-base sm:text-lg bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-lg"
               >
                 Start Now
               </Button>

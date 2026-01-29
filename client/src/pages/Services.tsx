@@ -149,7 +149,7 @@ export default function Services() {
           <FreeQuoteModal>
             <Button
               size="lg"
-              className="rounded-full px-10 h-14 text-lg bg-primary text-primary-foreground hover:bg-primary/90"
+              className="rounded-full px-6 sm:px-10 h-12 sm:h-14 text-base sm:text-lg bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Consult an Expert for Free
             </Button>

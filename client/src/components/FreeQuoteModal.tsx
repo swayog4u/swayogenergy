@@ -203,7 +203,7 @@ export function FreeQuoteModal({ children }: { children: React.ReactNode }) {
 
             <Button
               type="submit"
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg py-6 text-lg font-bold shadow-lg shadow-primary/20"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg py-4 sm:py-6 text-base sm:text-lg font-bold shadow-lg shadow-primary/20"
               disabled={isPending}
             >
               {isPending ? (

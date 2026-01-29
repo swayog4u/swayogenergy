@@ -68,7 +68,7 @@ export default function Home() {
               <FreeQuoteModal>
                 <Button
                   size="lg"
-                  className="h-14 px-8 text-lg rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-xl shadow-primary/20 w-full sm:w-auto"
+                  className="h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-xl shadow-primary/20 w-full sm:w-auto"
                 >
                   Get Free Quote
                 </Button>
@@ -77,7 +77,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="h-14 px-8 text-lg rounded-full border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm w-full"
+                  className="h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg rounded-full border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm w-full"
                 >
                   View Our Projects
                 </Button>
@@ -221,7 +221,7 @@ export default function Home() {
                 <Link href="/about">
                   <Button
                     size="lg"
-                    className="rounded-full px-8 bg-secondary hover:bg-secondary/90 text-white"
+                    className="rounded-full px-6 sm:px-8 h-12 sm:h-14 text-base sm:text-lg bg-secondary hover:bg-secondary/90 text-white"
                   >
                     More About Us
                   </Button>
@@ -278,7 +278,7 @@ export default function Home() {
           <FreeQuoteModal>
             <Button
               size="lg"
-              className="h-16 px-10 text-xl rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-lg shadow-black/20"
+              className="h-12 sm:h-14 px-6 sm:px-10 text-base sm:text-xl rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-lg shadow-black/20"
             >
               Get Free Consultation
             </Button>

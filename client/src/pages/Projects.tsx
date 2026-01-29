@@ -157,7 +157,7 @@ export default function Projects() {
                 clean electricity.
               </p>
               <FreeQuoteModal>
-                <Button className="btn-primary rounded-full px-8 text-lg">
+                <Button className="btn-primary rounded-full px-6 sm:px-8 h-12 sm:h-14 text-base sm:text-lg">
                   Get Your Proposal
                 </Button>
               </FreeQuoteModal>
