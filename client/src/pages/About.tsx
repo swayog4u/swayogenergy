@@ -24,7 +24,7 @@ export default function About() {
   ];
 
   const groupCompanies = [
-    "Swayog Energy Private Limited",
+    "Swayog Consultancy Services",
     "Swayog Energy Pvt. Ltd.",
     "Swayog Wattfin JV Pvt Ltd",
     "Wattfin Ventures Pvt Ltd, Nagpur"
