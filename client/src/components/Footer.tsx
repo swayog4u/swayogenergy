@@ -109,9 +109,9 @@ export function Footer() {
               <li className="flex items-start gap-3 text-gray-400">
                 <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <span>
-                  205, Gauri Ganesh Appartment UTKARSH NAGAR,
+                  205, Gauri Ganesh Appartment Utkarsh Nagar
                   <br />
-                  KT NAGAR GARDEN,behind Cake Link,
+                  Kt Nagar Garden, behind Cake Link,
                   <br />
                   Katol Road, Nagpur, Maharashtra 440013
                 </span>

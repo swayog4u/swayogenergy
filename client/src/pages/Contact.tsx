@@ -104,9 +104,9 @@ export default function Contact() {
                   <div>
                     <h3 className="text-lg font-bold mb-1">Our Office</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      205, Gauri Ganesh Appartment UTKARSH NAGAR,
+                      205, Gauri Ganesh Appartment Utkarsh Nagar,
                       <br />
-                      KT NAGAR GARDEN,behind Cake Link,
+                      Kt Nagar Garden,behind Cake Link,
                       <br />
                       Katol Road, Nagpur, Maharashtra 440013
                     </p>
@@ -142,7 +142,7 @@ export default function Contact() {
                   <div>
                     <h3 className="text-lg font-bold mb-1">Business Hours</h3>
                     <p className="text-gray-600">Monday - Saturday</p>
-                    <p className="text-gray-600">10:00 AM - 06:30 PM</p>
+                    <p className="text-gray-600">10:00am - 06:30pm</p>
                   </div>
                 </div>
               </div>

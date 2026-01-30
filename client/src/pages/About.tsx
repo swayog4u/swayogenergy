@@ -198,7 +198,7 @@ export default function About() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-20 overflow-hidden rounded-[2.5rem] shadow-2xl bg-[#2E8B57] text-white relative"
+            className="mb-20 overflow-hidden rounded-[2.5rem] shadow-2xl bg-[#0276cf] text-white relative"
           >
             {/* Background Decorative Pattern */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
