@@ -120,7 +120,7 @@ export default function Contact() {
                   <div>
                     <h3 className="text-lg font-bold mb-1">Phone</h3>
                     <p className="text-gray-600 mb-1">+91 8484030070</p>
-                    <p className="text-sm text-gray-500">Mon-Sat 9am-6pm</p>
+                    <p className="text-sm text-gray-500">Mon-Sat 10am-7pm</p>
                   </div>
                 </div>
 
@@ -187,7 +187,7 @@ export default function Contact() {
 
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" required placeholder="General Inquiry" />
+                  <Input id="subject" required placeholder="General Enquiry" />
                 </div>
 
                 <div className="space-y-2">

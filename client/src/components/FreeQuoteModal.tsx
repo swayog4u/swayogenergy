@@ -102,12 +102,12 @@ export function FreeQuoteModal({ children }: { children: React.ReactNode }) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email Address</Label>
+              <Label htmlFor="email">Email Address <span className="text-gray-400 text-sm">(Optional)</span></Label>
               <Input
                 id="email"
                 type="email"
                 {...form.register("email")}
-                placeholder="harshal@example.com"
+                placeholder="harshal@example.com (optional)"
                 className="rounded-lg"
               />
               {form.formState.errors.email && (
