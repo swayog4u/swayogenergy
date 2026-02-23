@@ -5,12 +5,152 @@ import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
 import { getReceiverEmail, getSenderEmail, getSmtpConfig, sendEmail } from "./email";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// ─── Gemini AI Setup ───
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
+let genAI: GoogleGenerativeAI | null = null;
+if (GEMINI_API_KEY) {
+  genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+  console.log("Gemini AI initialized for Suryamitra chatbot");
+} else {
+  console.warn("⚠ GEMINI_API_KEY not set — chatbot will use fallback responses");
+}
+
+const SOLAR_MITRA_SYSTEM_PROMPT = `You are "Suryamitra", a professional, knowledgeable solar energy assistant chatbot for Swayog Energy Private Limited.
+
+PERSONALITY & TONE:
+- Professional, warm, and confident about solar energy
+- Speak concisely — give SHORT, clear answers (2-4 sentences max unless listing plans)
+- NEVER use emojis. Keep the tone clean and premium.
+- Be helpful yet professional
+- If someone greets you, greet them back warmly
+
+COMPANY INFO (Swayog Energy):
+- Location: 205, Gauri Ganesh Apartment, Utkarsh Nagar, KT Nagar Garden, behind Cake Link, Katol Road, Nagpur, Maharashtra 440013
+- Phone: +91 8484030070
+- WhatsApp: +91 9272099152
+- Email: info@swayogurja.com / support@swayogurja.com
+- Hours: Mon-Sat, 10:00 AM - 6:30 PM
+- Services: Residential, Commercial, and Industrial solar installation across India
+
+SOLAR PLANS (use these when recommending):
+1. Basic Home (3 kW) — Rs 1,90,000*
+   - Tier-1 Polycrystalline Panels, String Inverter, Galvanized Structure
+   - 5 Year System Warranty, Net Metering Assistance
+   - Saves approx Rs 3,500/month | Best for: Monthly bill up to Rs 3,000
+
+2. Premium Home (5 kW) — Rs 3,10,000* (MOST POPULAR)
+   - Tier-1 Mono-PERC High Efficiency Panels, Smart WiFi Inverter
+   - Aluminium Rust-Free Structure, 5 Year Warranty, Priority Support
+   - Saves approx Rs 6,000/month | Best for: Monthly bill Rs 3,000 to Rs 6,000
+
+3. Large Villa (10 kW) — Rs 5,20,000*
+   - Bifacial Solar Panels, Advanced Monitoring App
+   - Elevated Structure Design, 5 Year Warranty, Quarterly Cleaning (1 Year)
+   - Saves approx Rs 12,000/month | Best for: Monthly bill above Rs 6,000
+
+* Prices are indicative. Government subsidy is extra.
+
+SUBSIDY INFO (PM Surya Ghar Muft Bijli Yojana):
+- Rs 30,000 for 1-2 kW systems
+- Rs 60,000 for 2-3 kW systems
+- Rs 78,000 for 3+ kW systems
+
+KEY SOLAR FACTS:
+- 1 kW generates approx 4-5 units/day (120-150 units/month)
+- Payback period: 4-6 years with subsidy
+- Panel lifespan: 25+ years
+- Works on cloudy days at 10-25% capacity
+- On-grid = connected to grid, net metering, no batteries
+- Off-grid = independent with batteries
+- Hybrid = grid + battery backup
+- Installation: 2-3 days, full process 4-8 weeks
+- Best orientation: South-facing, 15-30 degree tilt
+
+BEHAVIOR RULES:
+1. When user mentions their electricity bill amount, ALWAYS recommend the best plan from above and briefly explain why.
+2. After recommending a plan, ALWAYS suggest contacting Swayog Energy (give phone/WhatsApp).
+3. For questions outside solar/energy, politely redirect: "I specialize in solar energy. Ask me anything about solar panels, savings, or our plans."
+4. Keep responses SHORT and actionable.
+5. Never make up information about Swayog Energy that isn't provided above.
+6. If asked about custom/commercial/industrial (above 10kW), suggest contacting the team for a custom quote.
+7. NEVER use emojis in your responses. Keep the language clean and professional.`;
+
 
 export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
-  
+
+  // ─── Suryamitra Chatbot API ───
+  app.post('/api/chatbot', async (req, res) => {
+    try {
+      const { message, history } = req.body;
+
+      if (!message || typeof message !== 'string') {
+        return res.status(400).json({ success: false, reply: 'Please send a valid message.' });
+      }
+
+      // If Gemini is available, use AI
+      if (genAI) {
+        // Build conversation history for context
+        const chatHistory = (history || []).map((msg: { sender: string; text: string }) => ({
+          role: msg.sender === 'user' ? 'user' : 'model',
+          parts: [{ text: msg.text }],
+        }));
+
+        const chatConfig = {
+          history: [
+            {
+              role: 'user' as const,
+              parts: [{ text: 'System instruction: ' + SOLAR_MITRA_SYSTEM_PROMPT }],
+            },
+            {
+              role: 'model' as const,
+              parts: [{ text: 'Understood. I am Suryamitra, ready to help with solar energy questions for Swayog Energy. I will keep my answers short, professional, and always recommend the right plan based on the customer\'s bill.' }],
+            },
+            ...chatHistory,
+          ],
+        };
+
+        // Try with retry logic for rate limits
+        const models = ["gemini-2.0-flash", "gemini-1.5-flash"];
+        for (const modelName of models) {
+          for (let attempt = 0; attempt < 3; attempt++) {
+            try {
+              const model = genAI.getGenerativeModel({ model: modelName });
+              const chat = model.startChat(chatConfig);
+              const result = await chat.sendMessage(message);
+              const reply = result.response.text();
+              return res.json({ success: true, reply });
+            } catch (aiError: any) {
+              const status = aiError?.status || aiError?.httpStatusCode;
+              if (status === 429 && attempt < 2) {
+                // Rate limited — wait and retry
+                const waitMs = (attempt + 1) * 2000;
+                console.log(`Rate limited on ${modelName}, retrying in ${waitMs}ms (attempt ${attempt + 1})...`);
+                await new Promise(resolve => setTimeout(resolve, waitMs));
+                continue;
+              }
+              console.error(`Gemini ${modelName} error (attempt ${attempt + 1}):`, aiError.message);
+              break; // Move to next model
+            }
+          }
+        }
+      }
+
+      // Fallback response when AI is unavailable
+      return res.json({
+        success: true,
+        reply: "I'm currently unable to process your request. Please contact Swayog Energy directly:\n\nPhone: +91 8484030070\nWhatsApp: +91 9272099152\nEmail: info@swayogurja.com",
+      });
+    } catch (err) {
+      console.error('Chatbot error:', err);
+      return res.status(500).json({ success: false, reply: 'Something went wrong. Please try again.' });
+    }
+  });
+
   // Contact form route handler (for development - same logic as api/contact.ts)
   app.post('/api/contact', async (req, res) => {
     try {
