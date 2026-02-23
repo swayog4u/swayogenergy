@@ -46,7 +46,8 @@ export default function About() {
     { city: "Bangalore", state: "Karnataka", lat: 12.9716, lng: 77.5946 },
     { city: "Hyderabad", state: "Telangana", lat: 17.3850, lng: 78.4867 },
     { city: "Chennai", state: "Tamil Nadu", lat: 13.0827, lng: 80.2707 },
-    { city: "Kolkata", state: "West Bengal", lat: 22.5726, lng: 88.3639 }
+    { city: "Kolkata", state: "West Bengal", lat: 22.5726, lng: 88.3639 },
+    { city: "Imphal", state: "Manipur", lat: 24.8150, lng: 93.9375 }
   ];
 
   return (
