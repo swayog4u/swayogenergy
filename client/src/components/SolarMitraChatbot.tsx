@@ -86,11 +86,13 @@ export function SolarMitraChatbot() {
                 {
                     id: nextId(),
                     sender: "bot",
-                    text: "Namaste! I'm **Suryamitra**, your AI solar assistant from Swayog Energy.\n\nI can answer any solar question, help you find the best plan, or connect you with our team. How can I help?",
+                    text: "Namaste! I'm **Suryamitra**, your AI solar assistant from Swayog Energy.\n\nI can answer any solar question, recommend the best plan, troubleshoot issues, or connect you with our team. What would you like to know?",
                     options: [
                         "Best plan for me",
                         "How does solar work?",
                         "Available subsidies",
+                        "Solar panel types",
+                        "Troubleshooting help",
                         "Contact Swayog Energy",
                     ],
                 },
@@ -172,20 +174,39 @@ export function SolarMitraChatbot() {
         // Determine smart follow-up options
         const replyLower = reply.toLowerCase();
         let followUpOptions: string[];
-        if (replyLower.includes("bill") || replyLower.includes("plan") || replyLower.includes("₹")) {
+        if (replyLower.includes("bill") || replyLower.includes("plan") || replyLower.includes("rs ")) {
             followUpOptions = [
                 "Contact us",
                 "Available subsidies",
-                "Payback period",
+                "EMI / Financing options",
             ];
         } else if (replyLower.includes("contact") || replyLower.includes("phone")) {
             followUpOptions = [
                 "Best plan for me",
                 "How does solar work?",
             ];
+        } else if (replyLower.includes("inverter") || replyLower.includes("error") || replyLower.includes("fault")) {
+            followUpOptions = [
+                "Low generation issue",
+                "Battery backup options",
+                "Contact us",
+            ];
+        } else if (replyLower.includes("panel") || replyLower.includes("mono") || replyLower.includes("poly")) {
+            followUpOptions = [
+                "Best plan for me",
+                "Panel maintenance tips",
+                "Warranty details",
+            ];
+        } else if (replyLower.includes("clean") || replyLower.includes("maintenance")) {
+            followUpOptions = [
+                "Bird protection for panels",
+                "Best plan for me",
+                "Contact us",
+            ];
         } else {
             followUpOptions = [
                 "Best plan for me",
+                "Troubleshooting help",
                 "Contact us",
             ];
         }
