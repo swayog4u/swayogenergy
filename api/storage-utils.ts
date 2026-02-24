@@ -12,7 +12,13 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async createInquiry(insertInquiry: InsertInquiry): Promise<Inquiry> {
-    const [inquiry] = await db.insert(inquiries).values(insertInquiry).returning();
+    // Ensure `email` is a string (drizzle's insert expects non-optional fields)
+    const values = {
+      ...insertInquiry,
+      email: insertInquiry.email ?? "",
+    } as const;
+
+    const [inquiry] = await db.insert(inquiries).values(values).returning();
     return inquiry;
   }
 }
