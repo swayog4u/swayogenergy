@@ -26,7 +26,7 @@ if (GEMINI_API_KEY && GoogleGenerativeAI) {
     genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     console.log("Gemini AI initialized for Suryamitra chatbot");
   } catch (e) {
-    console.error('Failed to initialize Gemini SDK:', e?.message || e);
+    console.error('Failed to initialize Gemini SDK:', (e as Error)?.message || e);
     genAI = null;
   }
 } else if (GEMINI_API_KEY && !GoogleGenerativeAI) {

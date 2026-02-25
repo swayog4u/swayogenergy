@@ -13,7 +13,12 @@ export default function Contact() {
 
   // Use Vite env var for Google Maps API key to avoid committing secrets
   const mapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
-  const mapsSrc = `https://www.google.com/maps/embed/v1/place?q=Swayog%20Consultancy%20Services%2FSwayog%20Energy%20pvt%20limited%2C%20205%2C%20Katol%20Rd%2C%20KT%20Nagar%2C%20Nagpur%2C%20Maharashtra%20440013${mapsApiKey ? `&key=${mapsApiKey}` : ""}`;
+  const mapsQuery = encodeURIComponent(
+    "Swayog Consultancy Services/Swayog Energy pvt limited, 205, Katol Rd, KT Nagar, Nagpur, Maharashtra 440013"
+  );
+  const mapsSrc = mapsApiKey
+    ? `https://www.google.com/maps/embed/v1/place?key=${mapsApiKey}&q=${mapsQuery}&zoom=14`
+    : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -217,15 +222,23 @@ export default function Contact() {
 
           {/* Map */}
           <div className="mt-16 h-[400px] rounded-3xl overflow-hidden bg-gray-100 shadow-md">
-            <iframe
-              src={mapsSrc}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            {mapsApiKey ? (
+              <iframe
+                src={mapsSrc}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-gray-500 p-4">
+                <p className="text-center">
+                  Map unavailable — set VITE_GOOGLE_MAPS_API_KEY in your environment.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
