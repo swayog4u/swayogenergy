@@ -233,11 +233,16 @@ export default function Contact() {
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-500 p-4">
-                <p className="text-center">
-                  Map unavailable — set VITE_GOOGLE_MAPS_API_KEY in your environment.
-                </p>
-              </div>
+              // Fallback: use standard Google Maps embed (no API key) for public place search
+              <iframe
+                src={`https://maps.google.com/maps?q=${mapsQuery}&output=embed`}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Swayog Energy location"
+              ></iframe>
             )}
           </div>
         </div>
