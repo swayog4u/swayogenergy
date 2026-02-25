@@ -5,7 +5,6 @@ import { rm, readFile } from "fs/promises";
 // server deps to bundle to reduce openat(2) syscalls
 // which helps cold start times
 const allowlist = [
-  "@google/generative-ai",
   "axios",
   "connect-pg-simple",
   "cors",
@@ -44,7 +43,19 @@ async function buildAll() {
     ...Object.keys(pkg.dependencies || {}),
     ...Object.keys(pkg.devDependencies || {}),
   ];
-  const externals = allDeps.filter((dep) => !allowlist.includes(dep));
+  // Optional packages that should be treated as external even if present.
+  // This prevents bundling heavy optional SDKs (like Gemini) which may not
+  // be installed in all environments and can cause esbuild resolution errors.
+  const optionalPackages = [
+    "@google/generative-ai",
+  ];
+
+  const externals = Array.from(
+    new Set([
+      ...allDeps.filter((dep) => !allowlist.includes(dep)),
+      ...optionalPackages,
+    ])
+  );
 
   await esbuild({
     entryPoints: ["server/index.ts"],

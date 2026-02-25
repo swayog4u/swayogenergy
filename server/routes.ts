@@ -5,14 +5,32 @@ import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
 import { getReceiverEmail, getSenderEmail, getSmtpConfig, sendEmail } from "./email";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// Try to load the optional Gemini SDK at runtime. We avoid a static import
+// so the server build won't fail when the package isn't installed.
+let GoogleGenerativeAI: any = null;
+try {
+  const req: any = Function('return require')();
+  const mod = req("@google/generative-ai");
+  GoogleGenerativeAI = mod?.GoogleGenerativeAI ?? mod?.default ?? mod;
+} catch (e) {
+  GoogleGenerativeAI = null;
+  console.warn('Gemini SDK not available — chatbot will use fallback responses');
+}
 
 // ─── Gemini AI Setup ───
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
-let genAI: GoogleGenerativeAI | null = null;
-if (GEMINI_API_KEY) {
-  genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  console.log("Gemini AI initialized for Suryamitra chatbot");
+let genAI: any = null;
+if (GEMINI_API_KEY && GoogleGenerativeAI) {
+  try {
+    genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+    console.log("Gemini AI initialized for Suryamitra chatbot");
+  } catch (e) {
+    console.error('Failed to initialize Gemini SDK:', e?.message || e);
+    genAI = null;
+  }
+} else if (GEMINI_API_KEY && !GoogleGenerativeAI) {
+  console.warn('⚠ GEMINI_API_KEY set but Gemini SDK not installed — chatbot will use fallback responses');
 } else {
   console.warn("⚠ GEMINI_API_KEY not set — chatbot will use fallback responses");
 }

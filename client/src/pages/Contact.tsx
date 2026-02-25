@@ -11,6 +11,10 @@ export default function Contact() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Use Vite env var for Google Maps API key to avoid committing secrets
+  const mapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
+  const mapsSrc = `https://www.google.com/maps/embed/v1/place?q=Swayog%20Consultancy%20Services%2FSwayog%20Energy%20pvt%20limited%2C%20205%2C%20Katol%20Rd%2C%20KT%20Nagar%2C%20Nagpur%2C%20Maharashtra%20440013${mapsApiKey ? `&key=${mapsApiKey}` : ""}`;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -214,7 +218,7 @@ export default function Contact() {
           {/* Map */}
           <div className="mt-16 h-[400px] rounded-3xl overflow-hidden bg-gray-100 shadow-md">
             <iframe
-              src="https://www.google.com/maps/embed/v1/place?q=Swayog%20Consultancy%20Services%2FSwayog%20Energy%20pvt%20limited%2C%20205%2C%20Katol%20Rd%2C%20KT%20Nagar%2C%20Nagpur%2C%20Maharashtra%20440013&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+              src={mapsSrc}
               width="100%"
               height="100%"
               style={{ border: 0 }}
