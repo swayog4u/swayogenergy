@@ -18,6 +18,7 @@ export function Navbar() {
     { label: "Projects", href: "/projects" },
     { label: "Pricing", href: "/pricing" },
     { label: "About", href: "/about" },
+    { label: "wattsun.Ai", href: "/wattsun-ai" },
     { label: "Contact", href: "/contact" },
   ];
 

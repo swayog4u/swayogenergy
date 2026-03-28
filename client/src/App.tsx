@@ -11,6 +11,7 @@ import Services from "@/pages/Services";
 import Projects from "@/pages/Projects";
 import Pricing from "@/pages/Pricing";
 import Contact from "@/pages/Contact";
+import WattsunAi from "@/pages/WattsunAi";
 import NotFound from "@/pages/not-found";
 import { useEffect } from "react";
 
@@ -38,6 +39,7 @@ function Router() {
           <Route path="/projects" component={Projects} />
           <Route path="/pricing" component={Pricing} />
           <Route path="/contact" component={Contact} />
+          <Route path="/wattsun-ai" component={WattsunAi} />
           <Route component={NotFound} />
         </Switch>
       </main>
