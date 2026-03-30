@@ -17,7 +17,7 @@ import { useEffect } from "react";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { WhatsAppOverlay } from "@/components/WhatsAppOverlay";
-import { SolarMitraChatbot } from "@/components/SolarMitraChatbot";
+import { WattsunAiChatbot } from "@/components/WattsunAiChatbot";
 
 function Router() {
   const [location] = useLocation();
@@ -44,7 +44,7 @@ function Router() {
         </Switch>
       </main>
       <Footer />
-      <SolarMitraChatbot />
+      <WattsunAiChatbot />
       <WhatsAppOverlay />
     </div>
   );

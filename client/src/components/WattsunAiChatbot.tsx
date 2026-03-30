@@ -11,7 +11,7 @@ interface ChatMessage {
 }
 
 // ═══════════════════ Component ═══════════════════
-export function SolarMitraChatbot() {
+export function WattsunAiChatbot() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [input, setInput] = useState("");
@@ -86,7 +86,7 @@ export function SolarMitraChatbot() {
                 {
                     id: nextId(),
                     sender: "bot",
-                    text: "Namaste! I'm **Suryamitra**, your AI solar assistant from Swayog Energy.\n\nI can answer any solar question, recommend the best plan, troubleshoot issues, or connect you with our team. What would you like to know?",
+                    text: "Namaste! I'm **Wattsun AI**, your intelligent solar assistant.\n\nI can answer any solar question, recommend the best plan, troubleshoot issues, or connect you with our team. What would you like to know?",
                     options: [
                         "Best plan for me",
                         "How does solar work?",
@@ -250,7 +250,7 @@ export function SolarMitraChatbot() {
                         style={{
                             background: "linear-gradient(135deg, #d97706, #15803d)",
                         }}
-                        aria-label="Open Suryamitra chatbot"
+                        aria-label="Open Wattsun AI chatbot"
                         data-testid="btn-chatbot-open"
                     >
                         {/* Subtle pulse ring */}
@@ -263,7 +263,7 @@ export function SolarMitraChatbot() {
                         <Sun className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow" />
                         {/* Tooltip */}
                         <span className="absolute right-full mr-3 px-3 py-1.5 bg-gray-900 text-white text-xs sm:text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none hidden sm:block font-medium tracking-wide">
-                            Suryamitra
+                            Wattsun AI
                         </span>
                     </motion.button>
                 )}
@@ -298,10 +298,10 @@ export function SolarMitraChatbot() {
                             </div>
                             <div className="flex-1 min-w-0">
                                 <h3 className="text-white font-semibold text-[15px] leading-tight tracking-wide">
-                                    Suryamitra
+                                    Wattsun AI
                                 </h3>
                                 <p className="text-emerald-200/80 text-xs font-medium mt-0.5">
-                                    Swayog Energy • AI Assistant
+                                    Wattsun AI • Solar Assistant
                                 </p>
                             </div>
                             <button
@@ -418,7 +418,7 @@ export function SolarMitraChatbot() {
                                 </button>
                             </form>
                             <p className="text-[10px] text-center text-gray-300 mt-2 font-medium tracking-wider uppercase">
-                                Swayog Energy — AI Assistant
+                                Wattsun AI — Solar Assistant
                             </p>
                         </div>
                     </motion.div>

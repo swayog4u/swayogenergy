@@ -24,7 +24,7 @@ let genAI: any = null;
 if (GEMINI_API_KEY && GoogleGenerativeAI) {
   try {
     genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-    console.log("Gemini AI initialized for Suryamitra chatbot");
+    console.log("Gemini AI initialized for Wattsun AI chatbot");
   } catch (e) {
     console.error('Failed to initialize Gemini SDK:', (e as Error)?.message || e);
     genAI = null;
@@ -35,7 +35,7 @@ if (GEMINI_API_KEY && GoogleGenerativeAI) {
   console.warn("⚠ GEMINI_API_KEY not set — chatbot will use fallback responses");
 }
 
-const SOLAR_MITRA_SYSTEM_PROMPT = `You are "Suryamitra", a professional, knowledgeable solar energy assistant chatbot for Swayog Energy Private Limited.
+const WATTSUN_AI_SYSTEM_PROMPT = `You are "Wattsun AI", a professional, knowledgeable solar energy assistant chatbot for Swayog Energy (Wattsun AI service).
 
 PERSONALITY & TONE:
 - Professional, warm, and confident about solar energy
@@ -44,7 +44,7 @@ PERSONALITY & TONE:
 - Be helpful yet professional
 - If someone greets you, greet them back warmly
 
-COMPANY INFO (Swayog Energy):
+COMPANY INFO (Wattsun AI / Swayog Energy):
 - Location: 205, Gauri Ganesh Apartment, Utkarsh Nagar, KT Nagar Garden, behind Cake Link, Katol Road, Nagpur, Maharashtra 440013
 - Phone: +91 8484030070
 - WhatsApp: +91 9272099152
@@ -88,10 +88,10 @@ KEY SOLAR FACTS:
 
 BEHAVIOR RULES:
 1. When user mentions their electricity bill amount, ALWAYS recommend the best plan from above and briefly explain why.
-2. After recommending a plan, ALWAYS suggest contacting Swayog Energy (give phone/WhatsApp).
+2. After recommending a plan, ALWAYS suggest contacting Wattsun AI (give phone/WhatsApp).
 3. For questions outside solar/energy, politely redirect: "I specialize in solar energy. Ask me anything about solar panels, savings, or our plans."
 4. Keep responses SHORT and actionable.
-5. Never make up information about Swayog Energy that isn't provided above.
+5. Never make up information that isn't provided above.
 6. If asked about custom/commercial/industrial (above 10kW), suggest contacting the team for a custom quote.
 7. NEVER use emojis in your responses. Keep the language clean and professional.`;
 
@@ -101,7 +101,7 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
 
-  // ─── Suryamitra Chatbot API ───
+  // ─── Wattsun AI Chatbot API ───
   app.post('/api/chatbot', async (req, res) => {
     try {
       const { message, history } = req.body;
@@ -122,11 +122,11 @@ export async function registerRoutes(
           history: [
             {
               role: 'user' as const,
-              parts: [{ text: 'System instruction: ' + SOLAR_MITRA_SYSTEM_PROMPT }],
+              parts: [{ text: 'System instruction: ' + WATTSUN_AI_SYSTEM_PROMPT }],
             },
             {
               role: 'model' as const,
-              parts: [{ text: 'Understood. I am Suryamitra, ready to help with solar energy questions for Swayog Energy. I will keep my answers short, professional, and always recommend the right plan based on the customer\'s bill.' }],
+              parts: [{ text: 'Understood. I am Wattsun AI, ready to help with solar energy questions. I will keep my answers short, professional, and always recommend the right plan based on the customer\'s bill.' }],
             },
             ...chatHistory,
           ],
@@ -161,7 +161,7 @@ export async function registerRoutes(
       // Fallback response when AI is unavailable
       return res.json({
         success: true,
-        reply: "I'm currently unable to process your request. Please contact Swayog Energy directly:\n\nPhone: +91 8484030070\nWhatsApp: +91 9272099152\nEmail: info@swayogurja.com",
+        reply: "I'm currently unable to process your request. Please contact Wattsun AI / Swayog Energy directly:\n\nPhone: +91 8484030070\nWhatsApp: +91 9272099152\nEmail: info@swayogurja.com",
       });
     } catch (err) {
       console.error('Chatbot error:', err);
