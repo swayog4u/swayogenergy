@@ -257,7 +257,7 @@ const WattsunAi = () => {
                 </p>
                 <div className="hero-btns" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
                   <button className="w-btn-primary" onClick={handleLaunchApp}>Launch Wattsun.Ai</button>
-                  <button className="w-btn-outline">Explore Platform Features</button>
+                  <button className="w-btn-outline" onClick={() => document.getElementById('platform-capabilities')?.scrollIntoView({ behavior: 'smooth' })}>Explore Platform Features</button>
                 </div>
               </div>
 
@@ -341,7 +341,7 @@ const WattsunAi = () => {
         </div>
 
         {/* ══════════════ FEATURES ══════════════ */}
-        <div className="w-section-dark">
+        <div id="platform-capabilities" className="w-section-dark">
           <div style={{ position: "absolute", bottom: "-140px", left: "-140px", width: "460px", height: "460px", borderRadius: "50%", background: "radial-gradient(circle, rgba(251,191,36,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
           <div className="w-container" style={{ position: "relative" }}>
             <div className="features-header" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "44px" }}>
