@@ -31,11 +31,11 @@ export default function About() {
   ];
 
   const teamMembers = [
-    { name: "Kunal Dhakate", role: "Senior Engineer", image: "/images/kunal.jpeg" },
-    { name: "Tejaswini Khawas", role: "Project Manager", image: "/images/tejaswini.jpeg" },
-    { name: "Sagar Kinkar", role: "Documentation Specialist", image: "/images/sagar.jpeg" },
-    { name: "Installation Team", role: "Skilled Technicians", image: "/images/installation.jpeg" },
-    { name: "Technical Team", role: "Engineering Specialists", image: "/images/technical.jpeg" }
+    { name: "Kunal Dhakate", role: "Senior Engineer", image: "/images/kunal.png" },
+    { name: "Tejaswini Khawas", role: "Project Manager", image: "/images/tejaswini.png" },
+    { name: "Sagar Kinkar", role: "Documentation Specialist", image: "/images/sagar.png" },
+    { name: "Installation Team", role: "Skilled Technicians", image: "/images/installation.png" },
+    { name: "Technical Team", role: "Engineering Specialists", image: "/images/technical.png" }
   ];
 
   const locations = [
